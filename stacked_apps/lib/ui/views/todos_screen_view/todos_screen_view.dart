@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-
-import 'todos_screen_viewmodel.dart';
+import 'todos_screen_view_viewmodel.dart';
 
 class TodosScreenView extends StatelessWidget {
   const TodosScreenView({Key? key}) : super(key: key);
@@ -19,7 +18,7 @@ class TodosScreenView extends StatelessWidget {
               const Opacity(
                 opacity: 0.5,
                 child: Column(
-                  children:  [
+                  children: [
                     SizedBox(height: 64),
                     Icon(Icons.emoji_food_beverage_outlined, size: 48),
                     SizedBox(height: 16),

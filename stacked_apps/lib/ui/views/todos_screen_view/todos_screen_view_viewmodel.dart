@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-
-import '../../app/locator.dart';
-import '../../models/todo.dart';
-import '../services/todos.services.dart';
+import '../../../app/locator.dart';
+import '../../../models/todo.dart';
+import '../../../services/todos_service_service.dart';
 
 class TodosScreenViewModel extends ReactiveViewModel {
   final _firstTodoFocusNode = FocusNode();
