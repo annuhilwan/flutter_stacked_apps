@@ -1,30 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:stacked_apps/app/app.bottomsheets.dart';
-import 'package:stacked_apps/app/app.dialogs.dart';
-import 'package:stacked_apps/app/app.locator.dart';
-import 'package:stacked_apps/app/app.router.dart';
-import 'package:stacked_services/stacked_services.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-Future<void> main() async {
+import 'app/locator.dart';
+import 'models/todo.adapter.dart';
+import 'ui/todos_screen_view.dart';
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await setupLocator();
-  setupDialogUi();
-  setupBottomSheetUi();
-  runApp(const MainApp());
+  
+  await Hive.initFlutter();
+  Hive.registerAdapter(TodoAdapter());
+  await Hive.openBox('todos');
+  
+  setupLocator();
+  
+  runApp(const MyApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: Routes.startupView,
-      onGenerateRoute: StackedRouter().onGenerateRoute,
-      navigatorKey: StackedService.navigatorKey,
-      navigatorObservers: [
-        StackedService.routeObserver,
-      ],
+      debugShowCheckedModeBanner: false,
+      home: const TodosScreenView(),
+      theme: ThemeData.light(),
+      title: 'Flutter Stacked Apps',
     );
   }
 }
